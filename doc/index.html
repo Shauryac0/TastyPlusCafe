@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Plus Cafe - Delicious Bites & Beverages</title>
+    <style>
+        :root {
+            --bg-color: #f8f4f0;
+            --text-color: #3e2723;
+            --accent-color: #8d6e63;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #2c1810;
+            --text-color: #f5f5f5;
+            --accent-color: #a1887f;
+            --card-bg: #3e2723;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            z-index: 1000;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 0.5rem;
+            #animation: rotate 2s infinite linear;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url#('https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/sddefault.png') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+	    size: 100;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/sddefault.png') no-repeat center/cover;
+            transform: translateY(0);
+            #animation: parallax 10s infinite linear;
+        }
+        
+        @keyframes parallax {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+        
+        .hero-content {
+            z-index: 1;
+            color: white;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #6d4c41;
+            transform: scale(1.05);
+        }
+        
+        section {
+            padding: 4rem 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about, .menu, .contact {
+            margin-bottom: 4rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px var(--shadow);
+            padding: 2rem;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            animation: countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        footer {
+            background-color: var(--card-bg);
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 -2px 10px var(--shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { flex-direction: column; }
+            nav ul li { margin: 0.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/image/new.png" alt="Tasty Plus Cafe Logo">
+            Tasty Plus Cafe
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Tasty Plus Cafe</h1>
+            <p>Savor the best coffee, snacks, and meals in Unnao.</p>
+            <a href="#menu" class="btn">Explore Menu</a>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Located in Unnao, Tasty Plus Cafe is your go-to spot for fresh brews, tasty bites, and a welcoming atmosphere. We pride ourselves on quality ingredients and quick service.</p>
+	<h2>Address</h2>
+	<p>Moti Nagar, U.D.A Colony, Station Lines, Unnao, Uttar Pradesh 209801</p>
+        <div class="stats">
+            <div class="stat">
+                <h3 id="Meal-served">0</h3>
+                <p>Meal Served</p>
+            </div>
+            <div class="stat">
+                <h3 id="happy-customers">0</h3>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat">
+                <h3 id="years-open">0</h3>
+                <p>Years Open</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="menu" class="menu">
+        <h2>Our Menu</h2>
+        <p>Check out our popular items below. For the full menu with prices and ordering, visit our Zomato page.</p>
+	<div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+        <a href="https://www.zomato.com/unnao/tasty-plus-cafe-unnao-locality-unnao/order" target="_blank" class="btn">View Full Menu on Zomato</a>
+	</div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/veggiepizza.png" alt="Veggie Paradise Pizza">
+                <h3>Veggie Paradise Pizza</h3>
+                <p>₹240 - Corn, Olives, Paprika, Capsicum and Extra Cheese.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/rice.png">
+                <h3>Veg Fried Rice</h3>
+                <p>₹120</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/combo.png">
+                <h3>Double Veg Combo</h3>
+                <p>₹380 - Onion Paneer+Tomato Corn+Capsicum Tomato+Onion Capsicum [All 7 inches].</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/noodle.png">
+                <h3>Paneer Noodles</h3>
+                <p>₹90 - Paneer, Noodles and Spicy masala.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/pasta.png">
+                <h3>White Sauce Pasta</h3>
+                <p>₹150 - White Cheese, Mozerella, Veggies and Olives.</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://raw.githubusercontent.com/Shauryac0/TastPlusCafe/refs/heads/main/images/burger.png">
+                <h3>Tasty Plus Special Burger</h3>
+                <p>₹140</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>Visit us at: <a href="https://maps.app.goo.gl/fwCuZpHhAwuCofhe9" target="_blank">Our Location on Google Maps</a></p>
+        <p>Phone: (123) 456-7890 | Email: info@tastypluscafe.com</p>
+        <p>Order online: <a href="https://www.zomato.com/unnao/tasty-plus-cafe-unnao-locality-unnao/order" target="_blank">Zomato</a></p>
+	<p>Insta: <a href="https://www.instagram.com/tastypluscafe/" target="_blank">tastypluscafe</a></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Tasty Plus Cafe. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.setAttribute('data-theme', savedTheme);
+            themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Animated counters
+        function animateCounter(id, target) {
+            let count = 0;
+            const element = document.getElementById(id);
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    count = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(count);
+            }, 20);
+        }
+        
+        // Trigger counters on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('Meal-served', 50000);
+                    animateCounter('happy-customers', 10000);
+                    animateCounter('years-open', 5);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        observer.observe(document.querySelector('.stats'));
+        
+        // Smooth scrolling for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
